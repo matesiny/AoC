@@ -1,0 +1,15 @@
+když je pc git, tak jdeš do v CMD do ložky, kde chceš mít repo a napíšeš git init(když to dáš špatnì tak jen v té složce smažeš soubor .git)
+
+když dáš "git status", ukážou se èervené soubory(nové/upravané) èi zelené soubory(changes to be commited) nebo nic, když se nic nezmìnilo
+soubory na které se namá hrabat se zapíší do gitignore.txt (a naméšeš napøi forg.txt), pak to bude tenhle soubor ingorovat
+
+poté git add '.'/nebo jméno souboru, který (lze skontrolovat pomocí git status)
+
+následnì git commit -m "[jméno úpravy]", (lze skontrolovat pomocí git status(ano zase))
+
+git remote add origin 'https://github.com/matesiny/AoC.git'/ nebo jiný odkaz na repo - spojí repo v pc s githubem
+
+git push -u origin master - tohle už pošle soubory na github
+
+
+git branch -M [name] tím lze pøejmnenovat main branch v gitu
