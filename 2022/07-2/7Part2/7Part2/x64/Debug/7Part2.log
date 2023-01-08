@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\mates\source\repos\AoC\2022\07-2\7Part2\7Part2\Source.cpp(72,31): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\mates\source\repos\AoC\2022\07-2\7Part2\7Part2\Source.cpp(61,10): warning C4101: 'c': unreferenced local variable
+  7Part2.vcxproj -> C:\Users\mates\source\repos\AoC\2022\07-2\7Part2\x64\Debug\7Part2.exe
