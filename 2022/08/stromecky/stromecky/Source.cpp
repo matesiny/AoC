@@ -12,28 +12,22 @@
 
 using namespace std;
 
+// ukázka: 5x5, real 99x99
+
 int main()
 {
     string tp;
     fstream calor;
-    int x = 1, y = 0;
-    calor.open("stromky.txt", ios::in);
-    if (calor.is_open()) {  
-        for (; getline(calor, tp); x++);
-        calor.close();
-        for (; tp[y] != '\0'; y++);
-        y++;
-    }
-    x--, y--;
+
+    const int polestrobux = 99, polestromuy = 99;
+
+    int stromy[polestrobux][polestromuy];
+    int x = polestrobux, y = polestromuy;
+
     int Xmax = x, Ymax = y;
-
-    int** stromy = new int*[x];
-    for (int i = 0; i < x; i++)
-    {
-        stromy[i] = new int[y];
-    }
-
     y = 0;
+
+
     calor.open("stromky.txt", ios::in);
     if (calor.is_open()) {
         while (getline(calor, tp))
@@ -47,25 +41,14 @@ int main()
     }
     calor.close();
 
-    /*
-    for (x = 0; x < Xmax; x++)
-    {
-        for (y = 0; y < Ymax; y++)
-        {
-            cout << stromy[x][y];
-        }
-        cout << endl;
-    }
-    cout << endl;*/
 
-    int pocethidden = 0, schovany;
-
-    for (x = 1; x < Xmax-1; x++)
+    int pocethidden = 0, schovany, j;
+    for (x = 1; x < Xmax-1; x++)//part 1
     {
         for (y = 1; y < Ymax - 1; y++) // projiždí všechny stromy uvnitø
         {
             schovany = 0;
-            for (int j = 0; j < x; j++)
+            for (j = 0; j < x; j++)
             {
                 if ((stromy[j][y] >= stromy[x][y]))
                 {
@@ -74,7 +57,7 @@ int main()
                 }
             }
 
-            for (int j = x + 1; j < Xmax; j++)
+            for (j = x + 1; j < Xmax; j++)
             {
                 if ((stromy[j][y] >= stromy[x][y]))
                 {
@@ -83,7 +66,7 @@ int main()
                 }
             }
 
-            for (int j = 0; j < y; j++)
+            for (j = 0; j < y; j++)
             {
                 if ((stromy[x][j] >= stromy[x][y]))
                 {
@@ -92,7 +75,7 @@ int main()
                 }
             }
 
-            for (int j = y+1; j < Ymax; j++)
+            for (j = y+1; j < Ymax; j++)
             {
                 if (stromy[x][j] >= stromy[x][y])
                 {
@@ -105,6 +88,71 @@ int main()
         }
     }
 
+
+    int scene = 1, mostbeautiful = 0, sceneriecelkem, a, b;
+    bool odecist;
+    for (x = 0; x < Xmax; x++)//part2
+    {
+        for (y = 0; y < Ymax; y++) 
+        {
+            sceneriecelkem = 1;
+            for (j = x-1, scene = 1, odecist = true; j >= 0; j--, scene++)
+            {
+                if (stromy[j][y] >= stromy[x][y])
+                {
+                    odecist = false;
+                    break;
+                }
+            }
+            if (odecist) scene--;
+            sceneriecelkem *= scene;
+                
+
+            for (j = x+1, scene = 1, odecist = true; j < Xmax; j++, scene++)
+            {
+                if (stromy[j][y] >= stromy[x][y])
+                {
+                    odecist = false;
+                    break;
+                }
+            }
+            if (odecist) scene--;
+            sceneriecelkem *= scene;
+
+            for (j = y-1, scene = 1, odecist = true; j >= 0; j--, scene++)
+            {
+                if (stromy[x][j] >= stromy[x][y])
+                {
+                    odecist = false;
+                    break;
+                }
+            }
+            if (odecist) scene--;
+            sceneriecelkem *= scene;
+
+            for (j = y+1, scene = 1, odecist = true; j < Ymax; j++, scene++)
+            {
+                if (stromy[x][j] >= stromy[x][y])
+                {
+                    odecist = false;
+                    break;
+                }
+            }
+            if (odecist) scene--;
+            sceneriecelkem *= scene;
+
+
+            if (sceneriecelkem > mostbeautiful)
+            {
+                mostbeautiful = sceneriecelkem;
+                a = x, b = y;
+            }
+        }
+    }
+
+
     cout << "part 1: " << endl << " pocet viditelnych stromu: " << Xmax * Ymax - pocethidden << endl;
+
+    cout << endl << "part 2: " << endl << " nejlepsi strom: " << mostbeautiful << " souradnice x:" << a << " y:"<< b << endl;
 }
 
