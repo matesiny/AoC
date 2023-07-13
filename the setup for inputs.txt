@@ -1,0 +1,20 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+
+using namespace std;
+
+
+int main()
+{
+    fstream RPS;
+    RPS.open("Input.txt", ios::in); //open a file to perform read operation using file object
+    if (RPS.is_open()) {   //checking whether the file is open
+        string tp;
+        while (getline(RPS, tp))
+        {
+          
+        }
+        RPS.close();
+    }
+}

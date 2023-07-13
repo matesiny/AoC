@@ -161,7 +161,11 @@ int prevod(string tp)
 
 int main()
 {
-    const int numberOfKnots = 10;//should be larger than 0
+    int numberOfKnots;//should be larger than 0
+
+    cout << "How many knots does the rope have? ";
+    cin >> numberOfKnots;
+
     const int stred = 300;// to put the knots in the middle of the field
 
     bool detection[stred * 2][stred * 2];//we'll see where the rope was
@@ -212,7 +216,7 @@ int main()
                     if (currentknot->next == NULL)  // last knot-> we need to mark it's movement
                     { 
                         detection[currentknot->X][currentknot->Y] = true;
-                        break; // resets the movement cycle
+                        break; // starts moving through the list again... so that it can continue moving
                     }
 
                     move(currentknot->next, checkMove(currentknot, currentknot->next));
